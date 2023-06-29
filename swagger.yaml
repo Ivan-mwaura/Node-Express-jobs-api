@@ -1,0 +1,245 @@
+openapi: 3.0.0
+info:
+  title: jobs-API
+  contact: {}
+  version: '1.0'
+servers:
+  - url: https://jobs-api-006-ef2a7c7ffcee.herokuapp.com/api/v1
+    variables: {}
+paths:
+  /auth/register:
+    post:
+      tags:
+        - Auth
+      summary: RegisterUser
+      operationId: RegisterUser
+      parameters: []
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              allOf:
+                - $ref: '#/components/schemas/RegisterUserRequest'
+                - example:
+                    name: Ivanovich
+                    email: Ivangachanja@gmail.com
+                    password: feliscar
+            example:
+              name: Ivanovich
+              email: Ivangachanja@gmail.com
+              password: feliscar
+        required: true
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security: []
+  /auth/login:
+    post:
+      tags:
+        - Auth
+      summary: userLogin
+      operationId: userLogin
+      parameters: []
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              allOf:
+                - $ref: '#/components/schemas/userLoginRequest'
+                - example:
+                    name: evan
+                    email: evanjustin31@gmail.com
+                    password: feliscar
+            example:
+              name: evan
+              email: evanjustin31@gmail.com
+              password: feliscar
+        required: true
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security: []
+  /jobs:
+    post:
+      tags:
+        - jobs
+      summary: createJob
+      operationId: createJob
+      parameters: []
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              allOf:
+                - $ref: '#/components/schemas/createJobRequest'
+                - example:
+                    company: Netflix
+                    position: Analyst
+            example:
+              company: Netflix
+              position: Analyst
+        required: true
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security:
+        - bearer: []
+    get:
+      tags:
+        - jobs
+      summary: getAllJobs
+      operationId: getAllJobs
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security:
+        - bearer: []
+  '/jobs/{id}':  # Fixed indentation for the '/jobs/{id}' path
+    parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+        required: true
+        description: The job ID
+    get:
+      tags:
+        - jobs
+      summary: GetSingleJob
+      operationId: GetSingleJob
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security:
+        - bearer: []
+    patch:
+      tags:
+        - jobs
+      summary: updateJob
+      operationId: updateJob
+      parameters: []
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              allOf:
+                - $ref: '#/components/schemas/updateJobRequest'
+                - example:
+                    company: Huawei
+                    position: Network Engineer
+            example:
+              company: Huawei
+              position: Network Engineer
+        required: true
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security:
+        - bearer: []
+    delete:
+      tags:
+        - jobs
+      summary: deleteJob
+      operationId: deleteJob
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security:
+        - bearer: []
+components:
+  schemas:
+    RegisterUserRequest:
+      title: RegisterUserRequest
+      required:
+        - name
+        - email
+        - password
+      type: object
+      properties:
+        name:
+          type: string
+        email:
+          type: string
+        password:
+          type: string
+      example:
+        name: Ivanovich
+        email: Ivangachanja@gmail.com
+        password: feliscar
+    userLoginRequest:
+      title: userLoginRequest
+      required:
+        - name
+        - email
+        - password
+      type: object
+      properties:
+        name:
+          type: string
+        email:
+          type: string
+        password:
+          type: string
+      example:
+        name: evan
+        email: evanjustin31@gmail.com
+        password: feliscar
+    createJobRequest:
+      title: createJobRequest
+      required:
+        - company
+        - position
+      type: object
+      properties:
+        company:
+          type: string
+        position:
+          type: string
+      example:
+        company: Netflix
+        position: Analyst
+    updateJobRequest:
+      title: updateJobRequest
+      required:
+        - company
+        - position
+      type: object
+      properties:
+        company:
+          type: string
+        position:
+          type: string
+      example:
+        company: Huawei
+        position: Network Engineer
+  securitySchemes:
+    bearer:
+      type: http
+      scheme: bearer
+security: []
+tags:
+  - name: Auth
+    description: ''
+  - name: jobs
+    description: ''
