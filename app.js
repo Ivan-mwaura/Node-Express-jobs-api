@@ -42,7 +42,7 @@ app.use(xss())
 
 //dummy test route
 app.get('/',(req, res)=>{
-  res.send('<h1>Jobs Api</h1><a href="/api/docs">Api Documentation</a>')
+  res.send('<h1>Jobs Api</h1><a href="/api-docs">Api Documentation</a>')
 })
 
 app.use('/api-docs',swaggerUI.serve, swaggerUI.setup(swaggerDocument))
